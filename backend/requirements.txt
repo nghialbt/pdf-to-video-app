@@ -5,3 +5,4 @@ pymupdf
 moviepy<2.0.0
 numpy
 pillow
+websockets
