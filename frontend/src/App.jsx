@@ -60,7 +60,8 @@ function App() {
     formData.append("transition_duration", transitionDuration)
 
     try {
-      const response = await fetch("http://localhost:8000/generate-video", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"
+      const response = await fetch(`${API_URL}/generate-video`, {
         method: "POST",
         body: formData,
       })
