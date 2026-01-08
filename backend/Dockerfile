@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Fix ImageMagick policy
-RUN sed -i 's/none/read,write/g' /etc/ImageMagick-6/policy.xml
+RUN sed -i 's/none/read,write/g' /etc/ImageMagick-*/policy.xml
 
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
