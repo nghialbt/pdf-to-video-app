@@ -1,0 +1,8 @@
+__pycache__
+*.pyc
+.git
+.venv
+output_videos
+processed_images
+uploads
+.DS_Store
