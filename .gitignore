@@ -1,0 +1,22 @@
+# Node
+node_modules/
+dist/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.env
+db.sqlite3
+/backend/output_videos/
+/backend/processed_images/
+/backend/uploads/
+
+# OS
+.DS_Store
