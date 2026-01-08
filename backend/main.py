@@ -64,7 +64,8 @@ async def generate_video(
     create_video_from_images(image_paths, output_video_path, duration, transition, safe_transition_duration)
     
     # 4. Return video URL
-    video_url = f"http://localhost:8000/videos/{video_filename}"
+    base_url = os.getenv("RENDER_EXTERNAL_URL", "http://localhost:8000")
+    video_url = f"{base_url}/videos/{video_filename}"
     
     return {
         "video_url": video_url, 

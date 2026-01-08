@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: pdf-video-converter
+    env: docker
+    plan: free
+    dockerContext: .
+    dockerfilePath: backend/Dockerfile
+    envVars:
+      - key: PORT
+        value: 8000
