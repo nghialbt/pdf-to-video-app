@@ -55,6 +55,13 @@ def create_video_from_images(image_paths, output_video_path, duration_per_image,
         final_clip = concatenate_videoclips(clips, method="compose") # compose is safer than chain
     
     # Write the video file
-    final_clip.write_videofile(output_video_path, fps=24, codec='libx264', audio=False)
+    # Write the video file
+    # threads=1 to reduce memory usage
+    final_clip.write_videofile(output_video_path, fps=24, codec='libx264', audio=False, threads=1)
+    
+    # Close clips to free memory
+    final_clip.close()
+    for clip in clips:
+        clip.close()
     
     return output_video_path

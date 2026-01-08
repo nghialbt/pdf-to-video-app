@@ -4,7 +4,7 @@ import os
 import io
 from PIL import Image
 
-def extract_images_from_pdf(pdf_path, output_folder):
+def extract_images_from_pdf(pdf_path, output_folder, resize=True):
     """
     Extracts images from a PDF file.
     Returns a list of paths to the extracted images.
@@ -30,8 +30,21 @@ def extract_images_from_pdf(pdf_path, output_folder):
             image_path = os.path.join(output_folder, image_filename)
 
             # Save the image
-            with open(image_path, "wb") as f:
-                f.write(image_bytes)
+            # Resize image to save memory (Max 1920px) if resize is True
+            if resize:
+                try:
+                    img_pil = Image.open(io.BytesIO(image_bytes))
+                    img_pil.thumbnail((1920, 1920)) 
+                    img_pil.save(image_path)
+                except Exception as e:
+                    # Fallback to direct write if PIL fails
+                    print(f"PIL resize failed: {e}")
+                    with open(image_path, "wb") as f:
+                        f.write(image_bytes)
+            else:
+                # High quality - keep original
+                with open(image_path, "wb") as f:
+                    f.write(image_bytes)
             
             image_paths.append(image_path)
             

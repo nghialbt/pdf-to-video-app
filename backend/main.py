@@ -35,7 +35,8 @@ async def generate_video(
     file: UploadFile = File(...),
     duration: float = Form(...),
     transition: str = Form("none"),
-    transition_duration: float = Form(1.0)
+    transition_duration: float = Form(1.0),
+    quality: str = Form("low")
 ):
     # Generare unique ID for this request
     request_id = str(uuid.uuid4())
@@ -48,7 +49,8 @@ async def generate_video(
         
     # 2. Extract Images
     images_output_folder = os.path.join(PROCESSED_IMAGES_DIR, request_id)
-    image_paths = extract_images_from_pdf(pdf_path, images_output_folder)
+    should_resize = (quality == "low")
+    image_paths = extract_images_from_pdf(pdf_path, images_output_folder, resize=should_resize)
     
     if not image_paths:
         return {"error": "No images found in the PDF"}
