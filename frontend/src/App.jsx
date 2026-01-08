@@ -69,13 +69,13 @@ function App() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to generate video")
+        throw new Error(data.error || `Server Error: ${response.status} ${response.statusText}`)
       }
 
       setVideoUrl(data.video_url)
     } catch (err) {
       console.error(err)
-      setError("An error occurred while processing the PDF. Please try again.")
+      setError(err.message || "An error occurred while processing the PDF.")
     } finally {
       setLoading(false)
     }
